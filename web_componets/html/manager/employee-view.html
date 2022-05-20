@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Homepage Page for TRMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <nav class="navbar navbar-inverse fixed-top container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Tuition Reimbursement Management System</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="employee-login.html"><span class="glyphicon glyphicon-log-in"></span> Employee Login</a>
+            </li>
+            <li>
+                <a href="managment-login.html"><span class="glyphicon glyphicon-log-in"></span> Management Login</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="jumbotron">
+<!--_________________________________EMPLOYEE INFO______________________________________________-->
+
+    <div class="container">
+
+       <h1>EMPLOYEE DATA</h1>
+
+
+       <div class="button">
+    </div>
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>Employee Information</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Employee Id</td>
+                <td id="empId">-</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td id="email">-</td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td id="firstName">-</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td id="lastName">-</td>
+            </tr>            
+            <tr>
+                <td>Title</td>
+                <td id="title">-</td>
+            </tr>
+            <tr>
+                <td>Supervisor</td>
+                <td id="supervisor">-</td>
+            </tr>   
+            <tr>
+                <td>Department</td>
+                <td id="department">-</td>
+            </tr>
+            <tr>
+                <td>Dept Head</td>
+                <td id="deptHead">-</td>
+            </tr>                  
+        </table>
+    </div>
+<!--_______________________________________________________________________________-->
+<!--_________________________________USERBASE INFORMATION______________________________________________-->
+
+<div class="container">
+
+    <h1>USERBASE DATA</h1>
+
+
+    <div class="button">
+ </div>
+     <table class="table table-striped table-bordered table-hover">
+         <tr>
+             <th>Employee Userbase Information</th>
+             <th>Value</th>
+         </tr>
+         <tr>
+             <td>User Id</td>
+             <td id="userId">-</td>
+         </tr>
+         <tr>
+             <td>Employee Id</td>
+             <td id="empId">-</td>
+         </tr>
+         <tr>
+             <td>Username</td>
+             <td id="username">-</td>
+         </tr>
+         <tr>
+             <td>User Password</td>
+             <td id="userPassword">-</td>
+         </tr>            
+         <tr>
+             <td>User Privileges</td>
+             <td id="privilege">-</td>
+         </tr>      
+     </table>
+ </div>
+<!--_______________________________________________________________________________-->
+<!--_______________________________FORM VIEW______________________________________________-->
+<!--_______________________________________________________________________________-->
+<div class="container" id="forms">
+
+    <h1>FORM INFO</h1>
+<script>
+
+    function getEmployeeInfo() {
+
+        console.log("Getting Form")
+
+        //Step 1
+        let xhttp = new XMLHttpRequest();
+
+        //Step 2
+        xhttp.onreadystatechange = function () {
+
+            console.log(this.readyState)
+
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Successful Call")
+
+                console.log(this.responseText);
+                let employees = JSON.parse(this.responseText)
+                console.log(employeess)
+
+            document.getElementById("empId").innerHTML = employees.empId
+            document.getElementById("email").innerHTML = employees.email
+            document.getElementById("firstName").innerHTML = employees.firstName
+            document.getElementById("lastName").innerHTML = employees.lastName
+            document.getElementById("title").innerHTML = employees.title
+            document.getElementById("supervisor").innerHTML = employees.supervisor
+            document.getElementById("department").innerHTML = employees.department
+            document.getElementById("supervisor").innerHTML = employees.supervisor
+
+
+            }
+
+        }
+
+        id = document.cookie.split('id=')[1]
+        url = "http://localhost:5000/employees/" + id
+
+        //Step 3
+        xhttp.open("GET", url, true)
+
+        //step 4
+        xhttp.send()
+
+
+    }
+
+    function createRow(title,value, table, id){
+        let row = document.createElement("tr")
+        let tableData = document.createElement("td")
+        tableData.id = id
+        let tableDataDesc = document.createElement("td")
+        tableDataDesc.innerHTML = title
+        row.appendChild(tableDataDesc)
+        tableData.innerHTML = value
+        table.appendChild(row)
+        row.appendChild(tableData)
+    }
+    function getReimbursements() {
+
+        console.log("Getting Reimbursement Resquest")
+
+        //Step 1
+        let xhttp = new XMLHttpRequest();
+
+        //Step 2
+        xhttp.onreadystatechange = function () {
+
+            console.log(this.readyState)
+
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Successful Call")
+
+                console.log(this.responseText);
+                let reimbursements = JSON.parse(this.responseText)
+                console.log(reimbursements)
+
+                for (const reimbursement of reimbursements){   
+                   let table = document.createElement("table")
+                   table.className = "table table-striped table-bordered table-hover"
+                   let info = document.createElement("th")
+                   info.innerHTML = "Reimbursements Information"
+                   let value = document.createElement("th")
+                   value.innerHTML = "Value"
+                   table.appendChild(info)
+                   table.appendChild(value)
+
+                   document.getElementById("reimbursements").appendChild(table)
+
+                   createRow("Request Id:",reimbursement.requestId, table)
+                   createRow("Employee Id:",reimbursement.empId, table)
+                   createRow("Event Location:",reimbursement.eventLocation, table)
+                   createRow("Event Cost:",reimbursement.evCost, table)
+                   createRow("Event Type: ",reimbursement.evType, table)
+                   createRow("Description:",reimbursement.description, table)
+                   createRow("Justification:",reimbursement.justification, table)
+                   createRow("Grading Format:",reimbursement.gradingFormat, table)
+                   createRow("Grade:",reimbursement.gradingFormat, table)
+                   
+                    </div>
+
+                    <!--_______________________________________________________________________________-->
+                    <!--_______________________________FORM StATUS______________________________________________-->
+                    <!--_______________________________________________________________________________-->
+                 
+                   <div class="container" id="forms">
+
+                    <h1>FORM INFO</h1>
+
+                    <script>
+                    if(form.isApproved == 2){
+                        document.getElementById("approval" + form.employeeId + form.formId).innerHTML = "Approved"
+                    }
+                    else{
+                        document.getElementById("approval" + form.employeeId + form.formId).innerHTML = "Rejected"
+                    }
+
+                    let deniedInputDiv = document.createElement("div")
+                    let deniedInputLabel = document.createElement("label")
+                    let deniedInput = document.createElement("input")
+                    deniedInputDiv.appendChild(deniedInputLabel)
+                    deniedInputDiv.appendChild(deniedInput)
+                    table.appendChild(deniedInputDiv)
+                    deniedInputLabel.innerHTML = "Denial Reason :"
+
+                    let buttonDiv = document.createElement("div")
+                    let approveButton = document.createElement("button")
+                    approveButton.className = "btn btn-primary btn-block"
+                    let rejectButton = document.createElement("button")
+                    rejectButton.className = "btn btn-primary btn-danger btn-block"
+                    approveButton.innerHTML = "Approve"
+                    rejectButton.innerHTML = "Reject"
+                    buttonDiv.appendChild(approveButton)
+                    approveButton.onclick = function() { approveForm(form.formId,form.employeeId , form.cost , form.typeEvent) }
+                    buttonDiv.appendChild(rejectButton)
+                    rejectButton.onclick = function() { rejectForm(form.formId,form.employeeId ,deniedInput) }
+                    buttonDiv.appendChild(rejectButton)
+                    table.appendChild(buttonDiv)
+                 }   
+
+            }
+
+        }
+
+        url = "http://localhost:5000/forms/status"
+
+        //Step 3
+        xhttp.open("GET", url, true)
+
+        //step 4
+        xhttp.send()
+
+
+    }
+
+
+window.onload = function(){
+    curUser = getForms();
+    console.log(curUser);
+    empUser = getEmployeeInfo();
+    console.log(empUser);
+}
+
+</script>
+</div>
+</body>
+<footer class="page-footer col-md-12">
+    � 2022 Copyright: <a href="index.html">My TRMS Corporation by JDL</a>
+</footer>
+</html>

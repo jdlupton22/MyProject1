@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Homepage Page for TRMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <nav class="navbar navbar-inverse fixed-top container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Tuition Reimbursement Management System</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="employee-login.html"><span class="glyphicon glyphicon-log-in"></span> Employee Login</a>
+            </li>
+            <li>
+                <a href="employee-login.html"><span class="glyphicon glyphicon-log-in"></span> Management Login</a>
+            </li>
+        </ul>
+    </nav>
+
+
+<div class="jumbotron">
+    <h1>Welcome to the Management Landing Page </h1>
+    <p class="lead">What would you like to do next?</p>
+    <p><a href="manager-htmls/manager-form-update.html" class="btn btn-primary btn-large">Update Reimbursement Request &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>View All Employee Request</h2>
+        
+        <p><a class="btn btn-default" href="manager-reimbursement-view.html">View &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Request Information</h2>
+        <br />
+        <form id="admin-requester-form"
+              action="mailto:jdrevature@gmail.com"
+              method="POST"
+              enctype="multipart/form-data"
+              class="email-form">
+            <div class="form-actions">
+                <button id="admin-requester-btn" type="submit">Send Email</button>
+            </div>
+        </form>
+        
+    </div>
+    <div class="col-md-4">
+        <h2>Signout</h2>
+        
+        <p><a class="btn btn-default" href="managment-login.html">Signout &raquo;</a></p>
+    </div>
+</div>
+
+<footer class="page-footer col-md-12">
+    � 2022 Copyright: <a href="index.html">My TRMS Corporation by JDL</a>
+</footer>
+</body>
+</html>

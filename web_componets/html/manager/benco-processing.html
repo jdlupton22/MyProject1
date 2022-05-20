@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Employee Login</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Bootstrap-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Override navbar default css bg color -->
+    <link rel="stylesheet" href="nav.css" />
+
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+     <nav class="navbar navbar-inverse fixed-top container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Tuition Reimbursement Management System</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="employee-login.html"><span class="glyphicon glyphicon-log-in"></span> Employee Login</a>
+            </li>
+            <li>
+                <a href="management-login.html"><span class="glyphicon glyphicon-log-in"></span> Management Login</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="jumbotron">
+        <h1>Tuition Reimbursement Management System</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 ">
+                <div id="divlogin" class="panel-default">
+                    <div class="panel-heading">
+                        <h3 class="text-center">TRMS Benco Processing</h3>
+                    </div>
+
+    <h1>FORMS STATUS</h1>
+
+ </div>
+</body>
+<script>
+ function createRow(title,value, table, id){
+     let row = document.createElement("tr")
+     let tableData = document.createElement("td")
+     tableData.id = id
+     let tableDataDesc = document.createElement("td")
+     tableDataDesc.innerHTML = title
+     row.appendChild(tableDataDesc)
+     tableData.innerHTML = value
+     table.appendChild(row)
+     row.appendChild(tableData)
+ }
+ function getForms() {
+
+     console.log("Getting Form")
+
+     //Step 1
+     let xhttp = new XMLHttpRequest();
+
+     //Step 2
+     xhttp.onreadystatechange = function () {
+
+         console.log(this.readyState)
+
+         if (this.readyState == 4 && this.status == 200) {
+             console.log("Successful Call")
+
+             console.log(this.responseText);
+             let forms = JSON.parse(this.responseText)
+             console.log(forms)
+
+             for (const form of forms){   
+                let table = document.createElement("table")
+                table.className = "table table-striped table-bordered table-hover"
+                let info = document.createElement("th")
+                info.innerHTML = "Form Info"
+                let value = document.createElement("th")
+                value.innerHTML = "Value"
+                table.appendChild(info)
+                table.appendChild(value)
+
+                document.getElementById("forms").appendChild(table)
+
+                createRow("Employee Id:",form.employeeId, table)
+                createRow("Form Id:",form.formId, table)
+                createRow("Date:",form.date, table)
+                createRow("Time:",form.time, table)
+                createRow("Location:",form.location, table)
+                createRow("Description:",form.description, table)
+                createRow("Cost:",form.cost, table)
+                createRow("Grade:",form.gradingFormat, table)
+                createRow("Type of Event:",form.typeEvent, table)
+                createRow("Justification:",form.justification, table)
+                createRow("Approval Status:",form.isApproved, table, "approval" + form.employeeId + form.formId)
+                createRow("Denial reason: ",form.deniedReason, table)
+
+                 if(form.isApproved == 2){
+                     document.getElementById("approval" + form.employeeId + form.formId).innerHTML = "Approved"
+                 }
+                 else{
+                     document.getElementById("approval" + form.employeeId + form.formId).innerHTML = "Rejected"
+                 }
+
+                 let deniedInputDiv = document.createElement("div")
+                 let deniedInputLabel = document.createElement("label")
+                 let deniedInput = document.createElement("input")
+                 deniedInputDiv.appendChild(deniedInputLabel)
+                 deniedInputDiv.appendChild(deniedInput)
+                 table.appendChild(deniedInputDiv)
+                 deniedInputLabel.innerHTML = "Denial Reason :"
+
+                 let buttonDiv = document.createElement("div")
+                 let approveButton = document.createElement("button")
+                 approveButton.className = "btn btn-primary btn-block"
+                 let rejectButton = document.createElement("button")
+                 rejectButton.className = "btn btn-primary btn-danger btn-block"
+                 approveButton.innerHTML = "Approve"
+                 rejectButton.innerHTML = "Reject"
+                 buttonDiv.appendChild(approveButton)
+                 approveButton.onclick = function() { approveForm(form.formId,form.employeeId , form.cost , form.typeEvent) }
+                 buttonDiv.appendChild(rejectButton)
+                 rejectButton.onclick = function() { rejectForm(form.formId,form.employeeId ,deniedInput) }
+                 buttonDiv.appendChild(rejectButton)
+                 table.appendChild(buttonDiv)
+              }   
+
+         }
+
+     }
+
+     url = "http://localhost:5000/forms"
+
+     //Step 3
+     xhttp.open("GET", url, true)
+
+     //step 4
+     xhttp.send()
+
+
+ }
+     //UPDATE FORM
+     function approveForm(formId,employeeId,cost,type) {
+
+         console.log("Updating")
+
+
+
+         formEmployeeId = employeeId
+         formDate = ""
+         formTime = ""
+         formLocation = "" 
+         formDescription = "" 
+         formCost = cost
+         formGradingFormat = "" 
+         formTypeOfEvent = type
+         formJustification = ""
+         formIsApproved = 2
+         formDeniedReason = "N/A";
+
+
+         console.log("isApproved: " + formIsApproved)
+         console.log("deniedReason: " + formDeniedReason)
+
+ 
+         let xhr = new XMLHttpRequest();
+ 
+         xhr.onreadystatechange = function () {
+             console.log(this.readyState)
+             if (this.readyState == 4 && this.status == 200) {
+                 console.log(this.responseText)
+             }
+         }
+ 
+         url = "http://localhost:5000/employees/" + employeeId + "/form/" + formId
+ 
+         //Step 3
+         xhr.open("PUT", url, true)
+
+         let form = {
+             date : formDate,
+             time : formTime,
+             location : formLocation,
+             description : formDescription,
+             cost : formCost,
+             gradingFormat : formGradingFormat,
+             typeEvent : formTypeOfEvent,
+             justification : formJustification,
+             isApproved : formIsApproved,
+             deniedReason : formDeniedReason
+         }
+         console.log(form)
+         //step 4
+         xhr.setRequestHeader('Content-Type', 'application/json')
+
+         xhr.send(JSON.stringify(form));
+     }
+
+     function rejectForm(formId,employeeId,input) {
+
+         console.log("Updating")
+
+         
+
+         formDate = ""
+         formTime = ""
+         formLocation = "" 
+         formDescription = "" 
+         formCost = 0
+         formGradingFormat = "" 
+         formTypeOfEvent = ""
+         formJustification = ""
+         formIsApproved = 1
+         formDeniedReason = input.value;
+
+
+         console.log("isApproved: " + formIsApproved)
+         console.log("deniedReason: " + formDeniedReason)
+
+ 
+         let xhr = new XMLHttpRequest();
+ 
+         xhr.onreadystatechange = function () {
+             console.log(this.readyState)
+             if (this.readyState == 4 && this.status == 201) {
+                 console.log(this.responseText)
+             } 
+         }
+ 
+         url = "http://localhost:5000/employees/" + employeeId + "/form/" + formId
+ 
+         //Step 3
+         xhr.open("PUT", url, true)
+
+         let form = {
+             date : formDate,
+             time : formTime,
+             location : formLocation,
+             description : formDescription,
+             cost : formCost,
+             gradingFormat : formGradingFormat,
+             typeEvent : formTypeOfEvent,
+             justification : formJustification,
+             isApproved : formIsApproved,
+             deniedReason : formDeniedReason
+         }
+
+         //step 4
+         xhr.setRequestHeader('Content-Type', 'application/json')
+
+         xhr.send(JSON.stringify(form));
+ 
+ 
+ 
+     }
+
+     window.onload = function(){
+         curUser = getForms();
+         console.log(curUser);
+     }
+
+ </script>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Management Application Update Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <nav class="navbar navbar-inverse fixed-top container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Tuition Reimbursement Management System</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="employee-login.html"><span class="glyphicon glyphicon-log-in"></span> Employee Login</a>
+            </li>
+            <li>
+                <a href="management-login.html"><span class="glyphicon glyphicon-log-in"></span> Management Login</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="jumbotron">
+      <h3>Update Reimbursement Request Status</h3>
+      <table class="styled-table" id="createTable">
+        <thead id="createHead">
+          <tr>
+            <th>Rquest ID</th>
+            <th>Projected Award</th>
+            <th>Urgentcy</th>
+            <th>Application Status</th>
+            <th>Application State</th>
+            <th>Date and Time</th>
+          </tr>
+        </thead>
+        <tbody id="createBody">
+          <tr>
+            <td>
+              <input type="text" id="requestId" />
+            </td>
+            <td>
+              <input type="text" id="projectedAward" />
+            </td>
+            <td>
+              <input type="text" id="urgent" />
+            </td>
+            <td>
+              <input type="text" id="status" />
+            </td>
+            <td>
+              <input type="text" id="stage" />
+            </td>
+            <td>
+              <input type="text" id="requestDateTime" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="submit-button">
+        <button onclick="createReimbursement()" id="createReimbursementButton">
+          Submit
+        </button>
+      </div>
+      <br />
+      <table class="styled-table sortable" id="reimbursementTable">
+        <thead id="reimbursementHead">
+          <h3>Employee Reimbursement Requests</h3>
+          <tr>
+            <tr>
+                <th>Request ID</th>
+                <th>Employee id</th>
+                <th>Location</th>
+                <th>Cost</th>
+                <th>Event Type</th>
+                <th>Description</th>
+                <th>Justification</th>
+                <th>Grading Formnat</th>
+                <th>Grade Obtain</th>
+                <th>Status</th>
+                <th>Stage</th>
+                <th>Reason</th>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>1001</td>
+                  <td>Online</td>
+                  <td>$525.00</td>
+                  <td>CERT_PREP_CLASS</td>
+                  <td>pre cert course</td>
+                  <td>prep for cert</td>
+                  <td>Pass or Fail</td>
+                  <td>Fail</td>
+                  <td>DENIED</td>
+                  <td>END</td>
+                  <td>Failed and didn't provide proof of re-enrollment within a timely matter</td>
+              </tr>
+          </tr>
+        </thead>
+        <tbody id="reimbursementBody"></tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+                   
+                    
+        <p><a class="btn btn-default" href="management-login.html">Signout &raquo;</a></p>
+    </div>
+</div>
+<div class="col-md-4">
+    
+    
+    <p><a class="btn btn-default" href="management-hompage.html">Back &raquo;</a></p>
+</div>
+</div>
+
+    <script src="/js/employee.js"></script>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <footer class="page-footer col-md-12">
+        � 2022 Copyright: <a href="index.html">My TRMS Corporation by JDL</a>
+    </footer>
+  </body>
+</html>

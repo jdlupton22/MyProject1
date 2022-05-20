@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Homepage Page for TRMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <nav class="navbar navbar-inverse fixed-top container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index">Tuition Reimbursement Management System</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="employee-login.html"><span class="glyphicon glyphicon-log-in"></span> Employee Login</a>
+            </li>
+            <li>
+                <a href="managment-login.html"><span class="glyphicon glyphicon-log-in"></span> Management Login</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 column-left"></div>
+            <div class="col-md-6 column-center">
+                <h2>Welcome Employee: 1001</h2>
+                <hr />
+                <p>
+                    Your Reimbursement Request History Is As Follow:
+                </p>
+                <br />
+                <table class="styled-table sortable" id="reimbursementTable">
+                    <thead id="reimbursementHead">
+                      <h3>All Reimbursements</h3>
+                      <tr>
+                        <th>Request ID</th>
+                        <th>Employee id</th>
+                        <th>Location</th>
+                        <th>Cost</th>
+                        <th>Event Type</th>
+                        <th>Description</th>
+                        <th>Justification</th>
+                        <th>Grading Formnat</th>
+                        <th>Grade Obtain</th>
+                        <th>Status</th>
+                        <th>Stage</th>
+                        <th>Reason</th>
+                      </tr>
+                      <tr>
+                          <td>1</td>
+                          <td>1001</td>
+                          <td>Online</td>
+                          <td>$525.00</td>
+                          <td>CERT_PREP_CLASS</td>
+                          <td>pre cert course</td>
+                          <td>prep for cert</td>
+                          <td>Pass or Fail</td>
+                          <td>Fail</td>
+                          <td>DENIED</td>
+                          <td>END</td>
+                          <td>Failed and didn't provide proof of re-enrollment within a timely matter</td>
+                      </tr>
+
+                    </thead>
+                    <tbody id="reimbursementBody"></tbody>
+                  </table>
+                </div>
+
+                <div class="col-md-4">
+                    <h2>Signout</h2>
+                    
+                    <p><a class="btn btn-default" href="employee-homepage.html">Signout &raquo;</a></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4>Back to Homepage</h4>
+                
+                <p><a class="btn btn-default" href="employee-homepage.html">Back &raquo;</a></p>
+            </div>
+        </div>
+            
+            <footer class="page-footer col-md-12">
+                � 2022 Copyright: <a href="index.html">My TRMS Corporation by JDL</a>
+            </footer>
+            </body>
+            </html>
